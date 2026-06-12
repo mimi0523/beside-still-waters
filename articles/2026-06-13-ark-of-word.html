@@ -220,7 +220,7 @@
   <nav class="site-nav" id="siteNav">
     <div class="nav-inner">
       <a class="nav-brand" href="../index.html">溪水旁</a>
-      <a class="nav-back" href="../index.html" onclick="if(document.referrer.includes('index.html') || history.length > 1){event.preventDefault(); history.back();}">回首頁</a>
+      <a class="nav-back" href="../index.html" onclick="history.back(); return false;">回首頁</a>
     </div>
   </nav>
 
