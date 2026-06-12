@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「照常吃喝」的世代，你預備了嗎？｜溪水旁</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <meta name="description" content="神說祂要審判這個世界，不是嚇人的話，是真的。而預備話語的方舟，是為了活。">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand-yellow: #ffd803;
+      --ink: #272343;
+      --charcoal: #2d334a;
+      --stone: rgba(39, 35, 67, 0.45);
+      --teal-wash: #bae8e8;
+      --mint: #e3f6f5;
+      --canvas: #fffffe;
+      --hairline: rgba(39, 35, 67, 0.12);
+      --on-dark: #ffffff;
+      --font: 'Inter', 'Noto Sans TC', sans-serif;
+      --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-1: 0 1px 2px rgba(39, 35, 67, 0.04);
+      --shadow-2: 0 6px 18px rgba(39, 35, 67, 0.07);
+      --shadow-brand: 0 8px 24px rgba(255, 216, 3, 0.18);
+      --r-card: 18px;
+      --r-soft: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--charcoal);
+      background: var(--canvas);
+      line-height: 1.7;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { font-family: var(--font); color: var(--ink); margin: 0; }
+
+    /* ===== Nav ===== */
+    .site-nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 254, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .site-nav.scrolled { border-bottom-color: var(--hairline); box-shadow: var(--shadow-1); }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+    }
+    .nav-brand {
+      font-weight: 900; font-size: 1.2rem; color: var(--ink);
+      text-decoration: none; letter-spacing: 0.5px;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-brand::before { content: "🌿"; font-size: 1rem; }
+    .nav-back {
+      font-size: 14px; font-weight: 500; color: var(--charcoal);
+      text-decoration: none; transition: color var(--transition);
+      display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-back::before { content: "←"; }
+
+    /* ===== Article layout ===== */
+    .article-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 6rem;
+    }
+
+    .article-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 2rem;
+      font-size: 13px; color: var(--stone);
+    }
+    .article-meta .tag {
+      background: var(--teal-wash);
+      color: var(--ink);
+      font-weight: 600; font-size: 12px;
+      padding: 3px 12px; border-radius: 9999px;
+    }
+    .article-meta .dot { opacity: 0.4; }
+
+    .article-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .article-lead {
+      font-size: 1.15rem;
+      color: var(--charcoal);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    /* ===== Article body typography ===== */
+    .article-body {
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: var(--charcoal);
+    }
+    .article-body p { margin: 0 0 1.5rem; }
+    .article-body p:last-child { margin-bottom: 0; }
+
+    .article-body strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--hairline);
+      margin: 2.5rem 0;
+    }
+
+    .article-body .highlight-block {
+      background: var(--mint);
+      border-left: 3px solid var(--teal-wash);
+      border-radius: 0 var(--r-card) var(--r-card) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-size: 1.05rem;
+    }
+
+    /* ===== Email subscribe section ===== */
+    .subscribe-box {
+      margin-top: 5rem;
+      background: var(--ink);
+      color: var(--on-dark);
+      border-radius: var(--r-soft);
+      padding: 2.75rem 2.5rem;
+      text-align: center;
+    }
+    .subscribe-box h2 {
+      color: var(--on-dark);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .subscribe-box p {
+      color: rgba(255,255,255,0.72);
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+      line-height: 1.7;
+    }
+    .subscribe-form {
+      display: flex; gap: 0.75rem;
+      max-width: 420px; margin: 0 auto;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .subscribe-form input[type="email"] {
+      flex: 1; min-width: 200px;
+      padding: 0.85rem 1.25rem;
+      border-radius: 9999px;
+      border: none;
+      font-size: 1rem;
+      font-family: var(--font);
+      outline: none;
+      background: rgba(255,255,255,0.12);
+      color: var(--on-dark);
+    }
+    .subscribe-form input[type="email"]::placeholder { color: rgba(255,255,255,0.45); }
+    .subscribe-form input[type="email"]:focus { background: rgba(255,255,255,0.18); }
+    .subscribe-form button {
+      padding: 0.85rem 1.75rem;
+      border-radius: 9999px;
+      background: var(--brand-yellow);
+      color: var(--ink);
+      font-weight: 700; font-size: 1rem;
+      font-family: var(--font);
+      border: none; cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: var(--shadow-brand);
+      white-space: nowrap;
+    }
+    .subscribe-form button:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,216,3,0.3); }
+    .subscribe-note {
+      margin-top: 1rem;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 13px;
+      color: var(--stone);
+      border-top: 1px solid var(--hairline);
+    }
+    .site-footer a { color: var(--charcoal); text-decoration: none; }
+    .site-footer a:hover { color: var(--ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="../index.html">溪水旁</a>
+      <a class="nav-back" href="../index.html" onclick="if(document.referrer.includes('index.html') || history.length > 1){event.preventDefault(); history.back();}">回首頁</a>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <main class="article-wrap">
+
+    <div class="article-meta">
+      <span class="tag">末後與盼望</span>
+      <span class="dot">·</span>
+      <span>2026 年 6 月 13 日</span>
+      <span class="dot">·</span>
+      <span>約 5 分鐘</span>
+    </div>
+
+    <h1 class="article-title">「照常吃喝」的世代，你預備了嗎？</h1>
+
+    <p class="article-lead">
+      神說祂要審判這個世界，不是嚇人的話，是真的。而預備話語的方舟，不是為了「做對的事」——是為了活。
+    </p>
+
+    <div class="article-body">
+
+      <p>打開手機，全是美食、旅遊、理財攻略、還有各種「讓你快樂」的內容。</p>
+
+      <p>這個世界很忙，忙著享樂，忙著追求，忙著把每一分鐘填滿——唯獨不忙著思考一件事：這一切，有沒有盡頭？</p>
+
+      <hr>
+
+      <p>彼得後書第二章提到挪亞的時代。那時候的人在做什麼？「照常吃喝嫁娶」。</p>
+
+      <p>不是說吃喝嫁娶有什麼錯。問題是「照常」這兩個字——洪水要來了，神已經叫挪亞動手造方舟了，這些人還是一如往常，渾然不知，直到水淹上來的那一天。</p>
+
+      <p>我每次讀到這裡都覺得背脊發涼。</p>
+
+      <p>因為我們現在的樣子，不就是這樣嗎？</p>
+
+      <hr>
+
+      <p>我是從 2014 年開始重新認識神的。</p>
+
+      <p>在那之前，我也離開過教會、離開過上帝，用很長一段時間在黑暗裡打轉。後來神把我找回來，我才開始真正讀聖經了解上帝——不是表面的字句，是上帝的心意。</p>
+
+      <p>越讀越明白一件事：</p>
+
+      <div class="highlight-block">
+        <strong>神說祂要審判這個世界，不是嚇人的話，是真的。</strong>
+      </div>
+
+      <p>而祂願意讓我們在這個時候活著、讓我們有機會聽見這些話，就是因為祂還給我們時間預備。</p>
+
+      <hr>
+
+      <p>挪亞預備的是什麼？方舟。</p>
+
+      <p>我們預備的，是神的話語。</p>
+
+      <p>不是叫你死背金句，而是真的讓神的話進到你的裡面，讓祂改變你看這個世界的眼光、改變你做決定的方式、改變你對未來的態度。</p>
+
+      <p>這就是「預備話語的方舟」。</p>
+
+      <hr>
+
+      <p><strong>但我想說清楚一件事：預備話語不是為了「做對的事」而已。</strong></p>
+      <p><strong>是為了活。</strong></p>
+
+      <p>挪亞一家登上方舟，不是因為他們比別人聰明，是因為他們預備了。洪水來的時候，那艘方舟就是神保護他們的地方。審判沒有傷及他們一人，他們活下來，成為洪水之後重新建立人類歷史的祖先。</p>
+
+      <p>聖經說，神再來的時候，也是一樣的格局。</p>
+
+      <p>那些讓話語進入生命、真正被神的道改變的人，將成為審判之時被神保護、活下來的那一群——上帝恢復國度的<strong>第三個祖先</strong>。第一個祖先是亞當，第二個是挪亞，第三個，就是活過末後審判、在神完全恢復一切之後，跟神永遠住在一起的那些人。</p>
+
+      <div class="highlight-block">
+        這不是恐嚇，這是盼望。<br>
+        是神告訴我們：你有機會成為那個人。
+      </div>
+
+      <hr>
+
+      <p>我開始寫這些文章，就是為了這件事。</p>
+
+      <p>不是要說「你這樣不對」，是因為我嘗過——神的話真的有能力把一個走到谷底、一度不想活的人，變成一個對未來充滿盼望的人。</p>
+
+      <p>我希望還在掙扎的你，也能看見這個盼望。</p>
+
+      <p>末後的時代，我們更需要彼此提醒，更需要一起預備。</p>
+
+      <p>歡迎你繼續留在這裡。溪水旁很安靜，但這裡有讓你站穩、也讓你活下去的話語。</p>
+
+    </div>
+
+    <!-- Email subscribe -->
+    <div class="subscribe-box">
+      <h2>想繼續一起讀下去？</h2>
+      <p>留下你的 Email，每次有新文章我會第一時間通知你。</p>
+      <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="your@email.com" required>
+        <button type="submit">訂閱</button>
+      </form>
+      <p class="subscribe-note">隨時可以取消訂閱 · 完全免費</p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <a href="../index.html">🌿 溪水旁</a> &nbsp;·&nbsp; 詩篇 1 篇
+  </footer>
+
+  <script>
+    // Nav scroll shadow
+    const nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Subscribe placeholder（之後串真實工具）
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const input = e.target.querySelector('input');
+      btn.textContent = '謝謝你 🌿';
+      btn.disabled = true;
+      input.disabled = true;
+    }
+  </script>
+
+</body>
+</html>
