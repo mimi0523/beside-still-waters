@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你吃的是什麼糧？｜溪水旁</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <meta name="description" content="神給的糧，不是讓身體得飽足的，是讓靈魂活著的。你今天，吃了嗎？">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand-yellow: #ffd803;
+      --ink: #272343;
+      --charcoal: #2d334a;
+      --stone: rgba(39, 35, 67, 0.45);
+      --teal-wash: #bae8e8;
+      --mint: #e3f6f5;
+      --canvas: #fffffe;
+      --hairline: rgba(39, 35, 67, 0.12);
+      --on-dark: #ffffff;
+      --font: 'Inter', 'Noto Sans TC', sans-serif;
+      --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-1: 0 1px 2px rgba(39, 35, 67, 0.04);
+      --shadow-2: 0 6px 18px rgba(39, 35, 67, 0.07);
+      --shadow-brand: 0 8px 24px rgba(255, 216, 3, 0.18);
+      --r-card: 18px;
+      --r-soft: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--charcoal);
+      background: var(--canvas);
+      line-height: 1.7;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { font-family: var(--font); color: var(--ink); margin: 0; }
+
+    .site-nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 254, 0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .site-nav.scrolled { border-bottom-color: var(--hairline); box-shadow: var(--shadow-1); }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+    }
+    .nav-brand {
+      font-weight: 900; font-size: 1.2rem; color: var(--ink);
+      text-decoration: none; letter-spacing: 0.5px;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-brand::before { content: "🌿"; font-size: 1rem; }
+    .nav-back {
+      font-size: 14px; font-weight: 500; color: var(--charcoal);
+      text-decoration: none; transition: color var(--transition);
+      display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-back::before { content: "←"; }
+
+    .article-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 6rem;
+    }
+
+    .article-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 2rem;
+      font-size: 13px; color: var(--stone);
+      flex-wrap: wrap;
+    }
+    .article-meta .tag {
+      background: var(--teal-wash);
+      color: var(--ink);
+      font-weight: 600; font-size: 12px;
+      padding: 3px 12px; border-radius: 9999px;
+    }
+    .article-meta .dot { opacity: 0.4; }
+
+    .article-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .article-lead {
+      font-size: 1.15rem;
+      color: var(--charcoal);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .article-body {
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: var(--charcoal);
+    }
+    .article-body p { margin: 0 0 1.5rem; }
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-body strong { color: var(--ink); font-weight: 700; }
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--hairline);
+      margin: 2.5rem 0;
+    }
+    .article-body .highlight-block {
+      background: var(--mint);
+      border-left: 3px solid var(--teal-wash);
+      border-radius: 0 var(--r-card) var(--r-card) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-size: 1.05rem;
+    }
+    .article-body .solo-line {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .article-body blockquote {
+      margin: 2rem 0;
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--brand-yellow);
+      background: rgba(255, 216, 3, 0.06);
+      border-radius: 0 var(--r-card) var(--r-card) 0;
+      font-size: 1.08rem;
+      color: var(--ink);
+      font-style: normal;
+    }
+
+    .subscribe-box {
+      margin-top: 5rem;
+      background: var(--ink);
+      color: var(--on-dark);
+      border-radius: var(--r-soft);
+      padding: 2.75rem 2.5rem;
+      text-align: center;
+    }
+    .subscribe-box h2 {
+      color: var(--on-dark);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .subscribe-box p {
+      color: rgba(255,255,255,0.72);
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+      line-height: 1.7;
+    }
+    .subscribe-form {
+      display: flex; gap: 0.75rem;
+      max-width: 420px; margin: 0 auto;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .subscribe-form input[type="email"] {
+      flex: 1; min-width: 200px;
+      padding: 0.85rem 1.25rem;
+      border-radius: 9999px;
+      border: none;
+      font-size: 1rem;
+      font-family: var(--font);
+      outline: none;
+      background: rgba(255,255,255,0.12);
+      color: var(--on-dark);
+    }
+    .subscribe-form input[type="email"]::placeholder { color: rgba(255,255,255,0.45); }
+    .subscribe-form input[type="email"]:focus { background: rgba(255,255,255,0.18); }
+    .subscribe-form button {
+      padding: 0.85rem 1.75rem;
+      border-radius: 9999px;
+      background: var(--brand-yellow);
+      color: var(--ink);
+      font-weight: 700; font-size: 1rem;
+      font-family: var(--font);
+      border: none; cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: var(--shadow-brand);
+      white-space: nowrap;
+    }
+    .subscribe-form button:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,216,3,0.3); }
+    .subscribe-note {
+      margin-top: 1rem;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 13px;
+      color: var(--stone);
+      border-top: 1px solid var(--hairline);
+    }
+    .site-footer a { color: var(--charcoal); text-decoration: none; }
+    .site-footer a:hover { color: var(--ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="../index.html">溪水旁</a>
+      <a class="nav-back" href="../index.html" onclick="history.back(); return false;">回首頁</a>
+    </div>
+  </nav>
+
+  <main class="article-wrap">
+
+    <div class="article-meta">
+      <span class="tag">生命與真理</span>
+      <span class="dot">·</span>
+      <span>約 5 分鐘</span>
+    </div>
+
+    <h1 class="article-title">你吃的是什麼糧？</h1>
+
+    <p class="article-lead">
+      神給的糧，不是讓身體得飽足的，是讓靈魂活著的。而且是活到永遠。
+    </p>
+
+    <div class="article-body">
+
+      <p>你每天都在吃東西。</p>
+
+      <p>早餐、午餐、晚餐，餓了就找東西吃，這是理所當然的事。</p>
+
+      <p>但有沒有想過：你的靈魂，上一次吃東西是什麼時候？</p>
+
+      <hr>
+
+      <p>約翰福音第 6 章，耶穌說了一句讓當時所有人都傻眼的話：</p>
+
+      <blockquote>「我是從天上降下來的活糧。人若吃這糧，就必永遠活著。我所要賜的糧，就是我的肉，為世人之生命所賜的。」</blockquote>
+
+      <p>然後他繼續說：「你們若不吃人子的肉，不喝人子的血，就沒有生命在你們裡面。」</p>
+
+      <p>你看，當時的猶太人聽到這裡，直接就崩潰了——「這個人叫我們吃他的肉？這不是瘋了嗎？」</p>
+
+      <p>連跟著耶穌的門徒，很多人聽了之後，也搖搖頭說「這話太難了，誰能聽呢？」，然後就離開了。</p>
+
+      <p>那天，很多人走掉了。</p>
+
+      <hr>
+
+      <p>但這裡面藏著一個很重要的問題：</p>
+
+      <p><strong>我們聽了這句話，反應是什麼？</strong></p>
+
+      <p>我聽到的時候，第一個反應不是「這什麼意思」，而是「等等，這是在說我嗎？」</p>
+
+      <p>因為我自己也有過那種狀態——聽道，但聽完沒感覺。坐在那裡，話語進了耳朵，出了左耳，沒有在心裡留下什麼。</p>
+
+      <p>那不是話語的問題，是我的問題。</p>
+
+      <hr>
+
+      <p>這裡要先把一件事說清楚。</p>
+
+      <p>耶穌說的「吃肉喝血」，不是在談身體的食物。</p>
+
+      <p>聖經在這段話裡，從來就不是在說「你要怎麼讓肉體得飽足」。耶穌自己也說：「叫人活著的乃是靈，肉體是無益的。」</p>
+
+      <p>祂說的糧，是給靈魂的。是讓你裡面那個會渴慕、會空洞、會死亡的靈魂，得著真正的生命。</p>
+
+      <p>我們每天吃東西是為了讓身體活著，但身體終究會死。神給的糧，是讓靈魂活著，而且是活到永遠。</p>
+
+      <div class="highlight-block">
+        不要用錯方向——不是「我吃得健康，身體壯了，就是得了神的糧」；而是「我讓話語進入我裡面，靈魂被餵養了，這才是活糧。」
+      </div>
+
+      <hr>
+
+      <p>那這個活糧，具體是什麼？</p>
+
+      <p><strong>血，是信心，是十字架。</strong><br>
+      相信耶穌為我死了，這不是知識，是真的在心裡認定、在生活中活出來的信心。</p>
+
+      <p><strong>肉，是話語，是真理。</strong><br>
+      每一次讀聖經、聽證道，讓神的話真正進到你裡面，讓它影響你的想法、改變你做決定的方式。</p>
+
+      <p>這兩樣都要有，才算「吃了」。</p>
+
+      <hr>
+
+      <p>那為什麼很多人聽了話語卻沒有改變？</p>
+
+      <p>我在筆記裡寫下一句話，覺得自己終於搞懂了：</p>
+
+      <div class="highlight-block">
+        <strong>改變的動力來自渴慕，但那個渴慕是渴慕真理，不是渴慕自己改變。</strong>
+      </div>
+
+      <p>很多人想改變——想變得更有耐心，更不容易發脾氣，更有愛心。但「想改變」本身是出於自己，靠自己努力的改變，撐一陣子就沒力了。</p>
+
+      <p>真正讓人持續改變的，是因為<strong>上帝的再來真的吸引你</strong>——你相信祂要回來，你知道祂對你有計畫，你渴慕認識祂、靠近祂，所以你願意讓話語一次又一次塑造你。</p>
+
+      <p>那個改變是從裡面長出來的，不是從外面強迫的。</p>
+
+      <hr>
+
+      <p>話語，如果對你是活的，你聽的時候就會有滋味。</p>
+
+      <p>就像真正餓的時候吃飯，會覺得好吃；不餓的時候吃，就只是在填肚子。</p>
+
+      <p>你聽話語，有沒有滋味？</p>
+
+      <p class="solo-line">那個滋味，就是你的靈魂在說：我需要這個，我還沒吃飽。</p>
+
+      <hr>
+
+      <p>當天那些門徒離開之後，耶穌回頭問剩下的十二個人：「你們也要離去嗎？」</p>
+
+      <p>彼得回答：</p>
+
+      <blockquote>「主啊，你有永生之道，我們還歸從誰呢？」</blockquote>
+
+      <p>我每次讀到這裡都停下來。</p>
+
+      <p>不是因為彼得說得多漂亮，是因為這句話是真的——當你真的嘗過話語的滋味，你就再也離不開了。不是因為沒有地方去，是因為你知道，其他地方沒有這個。</p>
+
+      <hr>
+
+      <p>神賜給我們的糧，是不死的。</p>
+
+      <p>你今天，吃了嗎？</p>
+
+    </div>
+
+    <div class="subscribe-box">
+      <h2>想繼續一起讀下去？</h2>
+      <p>留下你的 Email，每次有新文章我會第一時間通知你。</p>
+      <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="your@email.com" required>
+        <button type="submit">訂閱</button>
+      </form>
+      <p class="subscribe-note">隨時可以取消訂閱 · 完全免費</p>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <a href="../index.html">🌿 溪水旁</a> &nbsp;·&nbsp; 詩篇 1 篇
+  </footer>
+
+  <script>
+    const nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const input = e.target.querySelector('input');
+      btn.textContent = '謝謝你 🌿';
+      btn.disabled = true;
+      input.disabled = true;
+    }
+  </script>
+
+</body>
+</html>
