@@ -56,6 +56,10 @@
     h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 900; line-height: 1.15; letter-spacing: -1px; }
     h2 { font-size: clamp(1.55rem, 3.4vw, 2.1rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.5px; }
     h3 { font-size: 1.4rem; font-weight: 600; line-height: 1.35; }
+    /* Tailwind 的重設樣式（h1～h6 字級、粗細 inherit）載入在後面會蓋掉上面兩行；
+       用 body 前綴提高優先順序，讓段落標題恢復大字粗體（h1 主標題另有設定，不動） */
+    body h2 { font-size: clamp(1.55rem, 3.4vw, 2.1rem); font-weight: 700; }
+    body h3 { font-size: 1.4rem; font-weight: 600; }
 
     .wrap     { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
     .wrap-wide { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
@@ -266,6 +270,23 @@
       box-shadow: var(--shadow-3);
     }
     .cta-box h2 { color: var(--on-dark); }
+    /* 問題表單 */
+    .q-form { max-width: 520px; margin: 2rem auto 0; text-align: left; display: grid; gap: 0.5rem; }
+    .q-hidden { display: none; }
+    .q-label { display: block; font-weight: 700; font-size: 0.95rem; color: var(--on-dark); margin-top: 0.75rem; padding: 0; }
+    .q-opt { font-weight: 400; color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+    .q-input { width: 100%; box-sizing: border-box; font: inherit; font-size: 1rem; color: var(--ink); background: var(--canvas); border: 2px solid transparent; border-radius: 12px; padding: 0.75rem 1rem; }
+    .q-input:focus { outline: none; border-color: var(--brand-yellow); }
+    textarea.q-input { resize: vertical; line-height: 1.6; }
+    .q-check { display: flex; gap: 0.6rem; align-items: flex-start; color: rgba(255,255,255,0.88); font-size: 0.97rem; line-height: 1.5; cursor: pointer; }
+    .q-check input { margin-top: 0.3rem; accent-color: var(--brand-yellow); flex-shrink: 0; }
+    .q-check { margin-top: 0.5rem; }
+    .cta-box .q-error { color: var(--brand-yellow); font-size: 0.9rem; text-align: center; max-width: none; margin: 1rem 0 0; }
+    .q-submit { margin-top: 1.25rem; justify-self: center; font-family: inherit; border: 0; cursor: pointer; }
+    .q-submit:disabled { opacity: 0.6; cursor: wait; }
+    .cta-box .q-note { font-size: 0.82rem; color: rgba(255,255,255,0.55); text-align: center; max-width: none; margin: 0.75rem 0 0; }
+    .q-thanks { margin-top: 2rem; }
+    .q-thanks h3 { color: var(--brand-yellow); font-size: 1.3rem; }
     .cta-box p { color: rgba(255,255,255,0.82); max-width: 460px; margin: 1rem auto 1.75rem; }
     .qr-card {
       background: var(--canvas);
@@ -488,8 +509,8 @@
       </div>
       <ul class="speaker-bio">
         <li>在社會上完全不起眼的一個社畜，但在神眼中卻看為寶貝的。</li>
-        <li>為了尋求真理去過不少教會，也參與過各式各樣的訓練和服事。</li>
-        <li>然而我也迷失在自己的人生低谷中...</li>
+        <li>曾經在教會穩定聚會，參與各式各樣的服事，也受過很紮實的訓練。</li>
+        <li>後來我迷失在人生的低谷中。家人朋友很擔心，帶我去了好幾間教會，可是我心裡那個沉重的疑問——我為什麼要活著？——始終沒有被解開……</li>
         <li>最終神帶我來到溪水旁（詩篇 1）。</li>
       </ul>
       <ul class="timeline">
@@ -537,6 +558,15 @@
           <p style="color: var(--stone); font-size: 0.97rem; line-height: 1.7; margin: 0;">神給的糧，不是讓身體得飽足的，是讓靈魂活著的。你今天，吃了嗎？</p>
         </a>
 
+        <a href="articles/2026-10-12-god-wants-to-tell.html" style="text-decoration: none; display: block; background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-card); padding: 1.75rem 2rem; box-shadow: var(--shadow-1); transition: box-shadow var(--transition), transform var(--transition);" onmouseover="this.style.boxShadow='var(--shadow-2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='var(--shadow-1)';this.style.transform='none'">
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem;">
+            <span style="background: var(--teal-wash); color: var(--ink); font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 9999px;">我的得著</span>
+            <span style="font-size: 12px; color: var(--stone);">約 3 分鐘</span>
+          </div>
+          <h3 style="color: var(--ink); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.3;">原來，神想告訴我們</h3>
+          <p style="color: var(--stone); font-size: 0.97rem; line-height: 1.7; margin: 0;">我以為用那種口氣禱告，是跟上帝很熟；後來才知道，其實很不尊重。</p>
+        </a>
+
       </div>
     </div>
   </section>
@@ -557,7 +587,7 @@
         </details>
         <details class="faq-item">
           <summary>想要更深一步的討論有什麼管道嗎？</summary>
-          <p>可以直接跟我預約一次談話，我們一對一好好聊——頁面最下方就能預約。先從 20 分鐘的初次認識開始，覺得需要，再約一小時深談。</p>
+          <p>頁面最下方可以留下你想問的事、讀完的心得，或你正在經歷的狀況。留言不會一對一回覆，但我都會看；很多人問到同樣的問題時，我或許會拍成影片或寫成文章回應。留下 email 的話，發布時我會通知你。</p>
         </details>
         <details class="faq-item">
           <summary>覺得神已經不要我了，還有辦法補救嗎？</summary>
@@ -567,15 +597,39 @@
     </div>
   </section>
 
-  <!-- ===== 預約區（一對一談話 CTA｜深藍大卡＋流星） ===== -->
+  <!-- ===== 問題收集區（email 問卷｜Netlify Forms｜深藍大卡＋流星） ===== -->
   <section id="cta-final">
     <div class="wrap">
       <div class="cta-box">
         <span class="eyebrow">🕊️ 想更靠近一點</span>
-        <h2>如果你願意，我們可以好好聊一次</h2>
-        <p>無論你正走過什麼——也許你正壓著一些說不出口的重擔想找人聊聊，也許你單純有問題想問、有什麼觀點想討論。每一個渴慕祂的人，都能在祂的話語裡找到解答。如果你願意，我很樂意陪你一起找。</p>
-        <p>你不需要先把自己整理好，也不用想好怎麼開口。<br>先從 20 分鐘的初次認識開始，覺得需要，我們再約一小時好好深談。</p>
-        <button type="button" class="btn-accent" style="font-family:inherit;" data-cal-link="beside-still-waters" data-cal-config='{"layout":"month_view"}'>預約一次談話 →</button>
+        <h2>把你的問題或心得留給我</h2>
+        <p>無論你正走過什麼——也許心裡壓著說不出口的重擔，也許單純有問題想問、有什麼觀點想討論。每一個渴慕祂的人，都能在祂的話語裡找到解答。</p>
+        <p>把你想問的、讀完的心得、正在經歷的，都可以留在這裡。留言不會一對一回覆，但我都會看；等累積到一定份量，或發現很多人問著同樣的問題，我或許會拍成影片或寫成文章回應。留下 email，發布時我會通知你。</p>
+
+        <form name="questions" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="q-form" id="qForm">
+          <input type="hidden" name="form-name" value="questions">
+          <p class="q-hidden"><label>請勿填寫：<input name="bot-field"></label></p>
+
+          <label class="q-label" for="q-name">怎麼稱呼你 <span class="q-opt">（選填）</span></label>
+          <input class="q-input" id="q-name" type="text" name="name" placeholder="暱稱就可以">
+
+          <label class="q-label" for="q-email">Email <span class="q-opt">（選填；想收到新內容通知的話請填）</span></label>
+          <input class="q-input" id="q-email" type="email" name="email" placeholder="you@example.com">
+
+          <label class="q-label" for="q-message">想問或想分享的 <span class="q-opt">（寫多少都可以）</span></label>
+          <textarea class="q-input" id="q-message" name="message" rows="5"></textarea>
+
+          <label class="q-check"><input type="checkbox" name="notify" value="是" id="q-notify"> 有新文章或影片時，用 email 通知我</label>
+          <label class="q-check"><input type="checkbox" name="consent" value="同意"> 我同意我的問題或心得在不透露身分的情況下，被拿來做成影片或文章</label>
+
+          <p class="q-error" id="qError" role="alert" hidden>寫下一點想問或想分享的，或勾選「用 email 通知我」並留下 email，再送出喔。</p>
+          <button type="submit" class="btn-accent q-submit">送出 →</button>
+          <p class="q-note">你的 email 只會用來通知新內容，不會給任何人；內容若被採用，一定會隱去可辨識身分的細節。</p>
+        </form>
+        <div class="q-thanks" id="qThanks" hidden>
+          <h3>謝謝你願意寫下來 🤍</h3>
+          <p>我收到了。你不孤單，我們一起在祂的話語裡找答案。</p>
+        </div>
       </div>
     </div>
   </section>
@@ -615,15 +669,38 @@
     setTimeout(spawnMeteor, 1500);
   </script>
 
-  <!-- ===== Cal.com 預約彈窗（點「預約一次談話」在原頁彈出） ===== -->
-  <script type="text/javascript">
-    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-    Cal("init", { origin: "https://cal.com" });
-    Cal("ui", {
-      "cssVarsPerTheme": { "light": { "cal-brand": "#272343" }, "dark": { "cal-brand": "#6DE3EA" } },
-      "hideEventTypeDetails": false,
-      "layout": "month_view"
-    });
+  <!-- ===== 問題表單：用 fetch 送到 Netlify Forms，留在原頁顯示感謝 ===== -->
+  <script>
+    (function () {
+      const form = document.getElementById('qForm');
+      if (!form) return;
+      // 勾了「通知我」才需要填 email
+      const notify = document.getElementById('q-notify');
+      const email = document.getElementById('q-email');
+      notify.addEventListener('change', function () { email.required = notify.checked; });
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // 至少要寫了內容，或勾了通知並留下 email，才送出（避免空白資料）
+        const msg = form.querySelector('[name="message"]').value.trim();
+        const err = document.getElementById('qError');
+        if (!msg && !(notify.checked && email.value.trim())) { err.hidden = false; return; }
+        err.hidden = true;
+        const btn = form.querySelector('.q-submit');
+        btn.disabled = true; btn.textContent = '送出中…';
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString()
+        }).then(function (res) {
+          if (!res.ok) throw new Error(res.status);
+          form.hidden = true;
+          document.getElementById('qThanks').hidden = false;
+        }).catch(function () {
+          btn.disabled = false; btn.textContent = '送出 →';
+          alert('送出時出了點問題，請稍後再試一次。');
+        });
+      });
+    })();
   </script>
 
 </body>
