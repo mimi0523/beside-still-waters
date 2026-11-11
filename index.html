@@ -42,7 +42,7 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; } /* 選單是 sticky，跳段落時留出選單高度，標題才不會被蓋住 */
     body {
       font-family: var(--font);
       color: var(--charcoal);
@@ -125,7 +125,26 @@
       text-decoration: none; transition: opacity var(--transition);
     }
     .nav-cta:hover { opacity: 0.88; }
-    @media (max-width: 860px) { .nav-links { display: none; } }
+    .nav-toggle {
+      display: none;
+      background: none; border: 0; cursor: pointer;
+      font-size: 1.5rem; line-height: 1; color: var(--ink);
+      padding: 0.25rem 0.5rem;
+    }
+    @media (max-width: 860px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: var(--canvas);
+        border-bottom: 1px solid var(--hairline);
+        box-shadow: var(--shadow-2);
+        padding: 0.25rem 1.5rem 0.75rem;
+      }
+      .site-nav.open .nav-links { display: flex; }
+      .nav-links a { display: block; padding: 0.75rem 0; font-size: 16px; }
+    }
 
     /* ===== Hero ===== */
     #hero {
@@ -402,14 +421,15 @@
   <nav class="site-nav" id="siteNav">
     <div class="nav-inner">
       <a class="nav-brand" href="#top">溪水旁</a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="#about">關於</a></li>
         <li><a href="#learn">你會得到</a></li>
         <li><a href="#audience">適合誰</a></li>
         <li><a href="#speaker">關於我</a></li>
+        <li><a href="#articles">文章</a></li>
         <li><a href="#faq">想問的</a></li>
       </ul>
-      
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="開啟選單" aria-expanded="false" aria-controls="navLinks">☰</button>
     </div>
   </nav>
 
@@ -526,11 +546,11 @@
   <!-- ===== 最新文章 ===== -->
   <section id="articles">
     <div class="wrap">
-      <span class="eyebrow">📖 最新分享</span>
+      <span class="eyebrow">📖 被觸動的地方，都寫在這裡</span>
       <h2>從這裡開始讀</h2>
       <div style="margin-top: 2rem; display: grid; gap: 1.25rem;">
 
-        <!-- 文章卡片 -->
+        <!-- 首頁文章固定 4 篇（mimi 2026-10-12 決定），所有文章頁 articles/index.html 放全部文章（2026-11-09） -->
         <a href="articles/2026-06-13-ark-of-word.html" style="text-decoration: none; display: block; background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-card); padding: 1.75rem 2rem; box-shadow: var(--shadow-1); transition: box-shadow var(--transition), transform var(--transition);" onmouseover="this.style.boxShadow='var(--shadow-2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='var(--shadow-1)';this.style.transform='none'">
           <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem;">
             <span style="background: var(--teal-wash); color: var(--ink); font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 9999px;">末後與盼望</span>
@@ -568,6 +588,10 @@
         </a>
 
       </div>
+
+      <p style="text-align: center; margin: 2rem 0 0;">
+        <a href="articles/index.html" style="display: inline-block; color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--hairline); border-radius: 9999px; padding: 0.65rem 1.5rem; transition: box-shadow var(--transition);" onmouseover="this.style.boxShadow='var(--shadow-2)'" onmouseout="this.style.boxShadow='none'">所有文章 →</a>
+      </p>
     </div>
   </section>
 
@@ -645,6 +669,17 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
+    // 手機版選單（☰）：點按鈕開關，點選單裡的連結後自動收起
+    const navToggle = document.getElementById('navToggle');
+    const setMenu = (open) => {
+      nav.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', open);
+      navToggle.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
+      navToggle.textContent = open ? '✕' : '☰';
+    };
+    navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+    document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
     // 流星：外層控軌跡、內層控旋轉，從右上往左下劃過 CTA 卡
     function spawnMeteor() {
       const box = document.querySelector('.cta-box');
@@ -703,5 +738,8 @@
     })();
   </script>
 
+  <!-- GoatCounter 流量統計（後台：besidestillwaters.goatcounter.com） -->
+  <script data-goatcounter="https://besidestillwaters.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
